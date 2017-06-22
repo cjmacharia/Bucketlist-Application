@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>register</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/app.css">
+</head>
+<body>
+<section class="top">
+		<div class="icon-left"><a href="">Bucketlist</a></div>
+      <div class="icon-right">
+        <div class="icon link"><a href="http://127.0.0.1:5000/login/">Login</a></div>
+        <div class="icon link"><a href="http://127.0.0.1:5000/register/" >Register</a></div>
+      </div>
+
+    </section>
+<center><div class="error"> {{ data }}</div></center>
+    <div class="panel">
+    <label class="text"><center>Register Here</center></label>
+    <div class="inputs">
+      <form  action={{url_for('reg')}} method="POST">
+    <center><input type="text" class= "input" name="name" placeholder="Your name"></center>
+     <center><input type="email" class= "input" name="email" placeholder="Email"></center>
+      <center><input type="password" class= "input" name="password" placeholder="password"></center>
+       <center><input type="password" class= "input" name="cpassword"  placeholder="cpassword"></center>
+        <center><button type="submit" class="button">Register</button></center>
+      </form>
+        </div>
+        <center><label ><small style="margin-top: 9px">already registered?<a href="http://127.0.0.1:5000/login/">login</a></small></label></center>
+        </div>
+
+</body>
+</html>
