@@ -1,4 +1,5 @@
 from flask import Flask, session, render_template, request, redirect, g, url_for
+import re
 user_id=0
 users = []
 class User():
@@ -17,12 +18,19 @@ class User():
                         if user['email']==email:
                             return 4
                     user = {}
-                    user['email']=email
-                    user['name']=name 
-                    user['password']=password
-                    users.append(user)
-                    print(users) 
-                    return  1
+                    regex = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+                    result = email
+                    if re.search(regex, result):
+                        match = re.search(regex, result)
+                         
+                        user['email']=email
+                        user['name']=name 
+                        user['password']=password
+                        users.append(user)
+                        print(users) 
+                        return  1
+                    else:
+                        return 5 
                 else:
                     return 2
             else:

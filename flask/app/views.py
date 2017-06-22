@@ -32,8 +32,12 @@ def reg():
 			elif result ==3:
 				msg= ("password mismatch")	
 				return render_template ('register.html',data=msg)
-
-
+			elif result==5:
+				error="email must be a valid email"
+				return render_template ('register.html', data=error)	
+			elif result==4:
+				error=" email already exists"
+				return render_template ('register.html', data=error)	
 	else:
 			return render_template ('register.html')	
 			
@@ -56,7 +60,7 @@ def logins():
 			return render_template ('login.html', data=error)	
 		elif loginResult==4:
 			error="password mismatch"
-			return render_template ('register.html', data=error) 	
+			return render_template ('register.html', data=error)	 	
 		else:
 			error = "cj"
 			return render_template ('login.html',data=error) 
