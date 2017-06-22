@@ -45,15 +45,23 @@ class User():
                     # print ('done')
                 else:
             #     else:
-                    return 3
-            # elif email!='' and password!='':
-            #     return 2
-            # else:
-            #     return 4        
-    def get_user_by_email(self, email):
+                    return 2
+            elif email!='' and password!='':
+                return 2
+            else:
+                return 4        
+    def get_user_name(self, email):
         for user in users:
             if user['email'] == email:
                 return user['name']
+                break
+        else:
+            return False
+
+    def get_user_email(self, email):
+        for user in users:
+            if user['email'] == email:
+                return user['email']
                 break
         else:
             return False

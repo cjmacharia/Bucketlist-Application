@@ -4,14 +4,16 @@ class Bucketlist():
 	Bucketlists=[]
 
 
-	def __init__(self,post=None,description=None,):
+	def __init__(self,post=None,description=None,owner=None):
 		self.post=post
 		self.description=description
-	def create(self,post, description):
+		self.owner=owner
+	def create(self,post, description, owner):
 		if description!=''and post!='':
 			data = {}
 			data['post'] = post
 			data['description']=description
+			data['owner']=owner
 			self.Bucketlists.append(data)
 			
 			return 1

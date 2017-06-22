@@ -48,12 +48,15 @@ def logins():
 		passLogin=request.form['password']
 		loginResult =newUser.login(emailLogin,passLogin)
 		if loginResult==1:
-			name = newUser.get_user_by_email(emailLogin)
+			name = newUser.get_user_name(emailLogin)
+			email = newUser.get_user_email(emailLogin)
 			print('done')
 			session['user']=name
+			session['email']=email
+			print(session['email'])
 			return render_template ('home.html', data=session)
-		elif loginResult==3:
-			error = "input a field"
+		elif loginResult==2:
+			error = "Password mismatch"
 			return render_template ('login.html', data=error)	
 		elif loginResult==3:
 			error = "mismatch"
@@ -62,7 +65,7 @@ def logins():
 			error="password mismatch"
 			return render_template ('register.html', data=error)	 	
 		else:
-			error = "cj"
+			error = "Wrong credentials please try again"
 			return render_template ('login.html',data=error) 
 	else:
 		return render_template('login.html')
@@ -72,10 +75,19 @@ def createBucketlist():
 	if request.method=="POST":
 		post=request.form['post']
 		describe =request.form['description']
-		result=NewBucketlist.create(post,describe)
+		print('here')
+		owner = session['email']
+		print(owner)
+		result=NewBucketlist.create(post,describe,owner)
 		if result==1:
 			data=NewBucketlist.Bucketlists
-			return render_template('mybucketlist.html', datas=data)
+			my_buckets = []
+			for bucket in data:
+				print(type(bucket))
+				print(bucket['owner'])
+				if bucket['owner']==session['email']:
+					my_buckets.append(bucket)
+			return render_template('mybucketlist.html', datas=my_buckets)
 		if result==2:
 			error ="please fill all fields"
 			return render_template('create.html' , data=error)
